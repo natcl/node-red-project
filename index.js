@@ -85,7 +85,7 @@ function initializeRepository (projectName) {
 function fetchDependencies (projectName) {
   console.log('Installing project dependencies...')
   try {
-    const dependencies = require(`./projects/${projectName}/package.json`).dependencies
+    const dependencies = JSON.parse(fs.readFileSync(`./projects/${projectName}/package.json`, 'utf-8')).dependencies
     for (const dependency in dependencies) {
       console.log(`Installing ${dependency}@${dependencies[dependency]}`)
       exec(`npm install --save-exact ${dependency}@${dependencies[dependency]}`)
