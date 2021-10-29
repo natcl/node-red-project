@@ -1,5 +1,5 @@
 {
-  "name": "node-red-init-project",
+  "name": "node-red-project",
   "version": "1.0.0",
   "description": "A command line utility to create or clone Node-RED projects",
   "main": "index.js",
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/natcl/node-red-init-project.git"
+    "url": "git+https://github.com/natcl/node-red-project.git"
   },
   "keywords": [
     "node-red"
@@ -23,7 +23,7 @@
   "author": "Nathanaël Lécaudé",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/natcl/node-red-init-project/issues"
+    "url": "https://github.com/natcl/node-red-project/issues"
   },
-  "homepage": "https://github.com/natcl/node-red-init-project#readme"
+  "homepage": "https://github.com/natcl/node-red-project#readme"
 }
