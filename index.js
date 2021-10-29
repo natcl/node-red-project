@@ -50,7 +50,7 @@ function cloneRepository (mode, projectName, repository) {
         exec(`cd projects/${projectName} && git remote add origin ${repository}`)
       }
     } else if (mode === 'clone') {
-      exec(`cd projects && git clone ${repository}`)
+      exec(`cd projects && git clone ${repository} ${projectName}`)
     }
   } catch (error) {
     console.log('Project already cloned, ignoring')
