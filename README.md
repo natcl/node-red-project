@@ -13,6 +13,6 @@ Note: use `null` to skip arguments.
 
 ### Cloning an existing project
 
-Syntax: npx natcl/node-red-project create projectName remoteRepository [credentialSecret]
+Syntax: npx natcl/node-red-project clone projectName remoteRepository [credentialSecret]
 
 Note: use `null` to skip arguments.
