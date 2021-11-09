@@ -5,6 +5,8 @@ This is useful for CI tasks or to quickly get going.
 
 ## Usage
 
+It is assumed that this command is run in the Node-RED `userDir`. It can be either global (`~/.node-red`) or local to a folder.
+
 ### Creating a project
 
 ```
