@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "A command line utility to create or clone Node-RED projects",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "minimist": "^1.2.5"
+  },
   "devDependencies": {
     "standard": "^16.0.4"
   },

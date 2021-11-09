@@ -2,15 +2,56 @@
 
 const fs = require('fs')
 const exec = require('child_process').execSync
+const argv = require('minimist')(process.argv.slice(2))
 
-const mode = process.argv[2]
-const projectName = process.argv[3]
-const repository = process.argv[4]
-const credentialSecret = process.argv[5] || null
-const flowFileName = process.argv[6] || 'flow'
+const verbose = argv.v || argv.verbose
+if (verbose) {
+  console.log(argv)
+}
+
+const mode = argv._[0]
+if (mode !== 'create' && mode !== 'clone') {
+  console.log('First argument should be either "create" or "clone", exiting.')
+  process.exit()
+}
+
+const projectName = argv._[1]
+if (!projectName) {
+  console.log('A project name should be provided as second argument, exiting.')
+}
+
+const remote = argv._[2] || argv.remote
+if (mode === 'clone' && typeof remote !== 'string') {
+  console.log('When cloning a project, a repository should be specified as third argument, exiting.')
+}
+
+const credentialSecret = argv.credentialSecret || null
+
+let flowFileName = 'flow'
+if (argv.flowFile) {
+  flowFileName = argv.flowFile.replace('.json', '')
+}
+
+const revision = argv.revision
+let cloneMode = null
+if (typeof revision === 'string' && revision.match(/\b[0-9a-f]{40}\b/)) {
+  cloneMode = 'hash'
+} else if (typeof revision === 'string') {
+  cloneMode = 'tag'
+}
+
+if (verbose) {
+  console.log('mode', mode)
+  console.log('projectName', projectName)
+  console.log('remote', remote)
+  console.log('credentialSecret', credentialSecret)
+  console.log('flowFile', flowFileName)
+  console.log('revision', revision)
+  console.log('cloneMode', cloneMode)
+}
 
 createConfigFile(projectName, credentialSecret)
-cloneRepository(mode, projectName, repository)
+initRepository(mode, projectName, remote)
 fetchDependencies(projectName)
 
 function createConfigFile (projectName, credentialSecret) {
@@ -37,7 +78,7 @@ function createConfigFile (projectName, credentialSecret) {
   fs.writeFileSync('.config.projects.json', JSON.stringify(configProjectFile, null, 2))
 }
 
-function cloneRepository (mode, projectName, repository) {
+function initRepository (mode, projectName, remote) {
   try {
     fs.mkdirSync('projects', { recursive: true })
     if (mode === 'create') {
@@ -45,15 +86,24 @@ function cloneRepository (mode, projectName, repository) {
       createProjectFiles(projectName)
       initializeRepository(projectName)
 
-      if (repository && repository !== 'null') {
-        console.log('Adding remote', repository)
-        exec(`cd projects/${projectName} && git remote add origin ${repository}`)
+      if (remote && remote !== 'null') {
+        console.log('Adding remote', remote)
+        exec(`cd projects/${projectName} && git remote add origin ${remote}`)
       }
     } else if (mode === 'clone') {
-      exec(`cd projects && git clone ${repository} ${projectName}`)
+      if (cloneMode === 'hash') {
+        exec(`cd projects && mkdir ${projectName} && cd ${projectName} && git init && git remote add origin ${remote} && git fetch --depth 1 origin ${revision} && git checkout FETCH_HEAD`)
+      } else if (cloneMode === 'tag') {
+        exec(`cd projects && git clone --depth 1 --single-branch --branch ${revision} ${remote} ${projectName}`)
+      } else {
+        exec(`cd projects && git clone ${remote} ${projectName}`)
+      }
     }
   } catch (error) {
     console.log('Project already cloned, ignoring')
+    if (verbose) {
+      console.error(error)
+    }
   }
 }
 
