@@ -7,18 +7,24 @@ This is useful for CI tasks or to quickly get going.
 
 ### Creating a project
 
-Syntax: npx natcl/node-red-project create projectName 
+```
+npx natcl/node-red-project create projectName [OPTIONS]
+```
 
-Options:
+| Options            | Description                       | Example                                   |
+|--------------------|-----------------------------------|-------------------------------------------|
+| --remote           | The remote repository             | git@github.com:natcl/node-red-project.git |
+| --credentialSecret | Credential Secret of the project  | myPassword                                |
+| --flowFile         | The name of the desired flow file | myFlows                                   |
 
---remote : The remote repository  
---credentialSecret: Credential Secret of the project  
---flowFile: The name of the desired flow file
 ### Cloning an existing project
 
-Syntax: npx natcl/node-red-project clone projectName remoteRepository 
+```
+npx natcl/node-red-project clone projectName remoteRepository [OPTIONS]
+```
 
-Options:
-
---credentialSecret: Credential Secret of the project  
---revision: the git tag or hash to clone
+| Options            | Description                       | Example                                   |
+|--------------------|-----------------------------------|-------------------------------------------|
+| --credentialSecret | Credential Secret of the project  | myPassword                                |
+| --flowFile         | The name of the desired flow file | myFlows                                   |
+| --revision         | the git tag or hash to clone      | myTag                                     |
