@@ -28,5 +28,4 @@ npx natcl/node-red-project clone projectName remoteRepository [OPTIONS]
 | Options            | Description                       | Example                                   |
 |--------------------|-----------------------------------|-------------------------------------------|
 | --credentialSecret | Credential Secret of the project  | myPassword                                |
-| --flowFile         | The name of the desired flow file | myFlows                                   |
 | --revision         | the git tag or hash to clone      | myTag                                     |
