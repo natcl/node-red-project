@@ -12,7 +12,7 @@ if (verbose) {
 const mode = argv._[0]
 if (mode !== 'create' && mode !== 'clone') {
   console.log('First argument should be either "create" or "clone", exiting.')
-  process.exit()
+  process.exit(1)
 }
 
 const projectName = argv._[1]
