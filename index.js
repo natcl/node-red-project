@@ -26,6 +26,7 @@ if (mode === 'clone' && typeof remote !== 'string') {
 }
 
 const credentialSecret = argv.credentialSecret || null
+if (!credentialSecret) console.log('Warning: credentialSecret is null, is this intended?')
 
 let flowFileName = 'flow'
 if (argv.flowFile) {
