@@ -25,6 +25,8 @@ if (mode === 'clone' && typeof remote !== 'string') {
   console.log('When cloning a project, a repository should be specified as third argument, exiting.')
 }
 
+const doNotFetchDependencies = argv.doNotFetchDependencies ? true : false
+
 const credentialSecret = argv.credentialSecret || null
 if (!credentialSecret) console.log('Warning: credentialSecret is null, is this intended?')
 
@@ -46,6 +48,7 @@ if (verbose) {
   console.log('projectName', projectName)
   console.log('remote', remote)
   console.log('credentialSecret', credentialSecret)
+  console.log('doNotFetchDependencies', doNotFetchDependencies)
   console.log('flowFile', flowFileName)
   console.log('revision', revision)
   console.log('cloneMode', cloneMode)
@@ -53,7 +56,7 @@ if (verbose) {
 
 createConfigFile(projectName, credentialSecret)
 initRepository(mode, projectName, remote)
-fetchDependencies(projectName)
+if (!doNotFetchDependencies) fetchDependencies(projectName)
 
 function createConfigFile (projectName, credentialSecret) {
   let configProjectFile = {
