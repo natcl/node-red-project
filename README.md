@@ -13,11 +13,12 @@ It is assumed that this command is run in the Node-RED `userDir`. It can be eith
 npx natcl/node-red-project create projectName [OPTIONS]
 ```
 
-| Options            | Description                       | Example                                   |
-|--------------------|-----------------------------------|-------------------------------------------|
-| --remote           | The remote repository             | git@github.com:natcl/node-red-project.git |
-| --credentialSecret | Credential Secret of the project  | myPassword                                |
-| --flowFile         | The name of the desired flow file | myFlows                                   |
+| Options                  | Description                                            | Example                                   |
+| ------------------------ | ------------------------------------------------------ | ----------------------------------------- |
+| --remote                 | The remote repository                                  | git@github.com:natcl/node-red-project.git |
+| --credentialSecret       | Credential Secret of the project                       | myPassword                                |
+| --doNotFetchDependencies | If present, won't fetch dependencies from package.json |                                           |
+| --flowFile               | The name of the desired flow file                      | myFlows                                   |
 
 ### Cloning an existing project
 
@@ -25,7 +26,10 @@ npx natcl/node-red-project create projectName [OPTIONS]
 npx natcl/node-red-project clone projectName remoteRepository [OPTIONS]
 ```
 
-| Options            | Description                       | Example                                   |
-|--------------------|-----------------------------------|-------------------------------------------|
-| --credentialSecret | Credential Secret of the project  | myPassword                                |
-| --revision         | the git tag or hash to clone      | myTag                                     |
+| Options                  | Description                                            | Example    |
+| ------------------------ | ------------------------------------------------------ | ---------- |
+| --credentialSecret       | Credential Secret of the project                       | myPassword |
+| --revision               | the git tag or hash to clone                           | myTag      |
+| --doNotFetchDependencies | If present, won't fetch dependencies from package.json |            |
+
+
