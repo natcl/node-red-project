@@ -28,7 +28,7 @@ if (mode === 'clone' && typeof remote !== 'string') {
 const doNotFetchDependencies = argv.doNotFetchDependencies ? true : false
 
 const credentialSecret = argv.credentialSecret || null
-if (!credentialSecret) console.log('Warning: credentialSecret is null, is this intended?')
+if (credentialSecret === null || credentialSecret === true) console.log('Warning: credentialSecret is null, is this intended?')
 
 let flowFileName = 'flow'
 if (argv.flowFile) {
